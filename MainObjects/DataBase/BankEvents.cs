@@ -71,8 +71,9 @@ namespace BankObjects.EventMessages
             TransactionMessages.Add(transactionMessage);
         }
 
-        public static void CardUpData(Card card)
+        public static async void CardUpData(Card card)
         {
+
             //Изменяем в базе карт все изменяемые во время транзакций поля.
             switch (card)
             {
@@ -80,9 +81,9 @@ namespace BankObjects.EventMessages
 
                     BankDBContext.DebitCard.Where(c => c.CardId == card.CardId).
                         Update(c => new()
-                        { 
-                            Balance = card.Balance, 
-                            CashBack = (card as Debit).CashBack 
+                        {
+                            Balance = card.Balance,
+                            CashBack = (card as Debit).CashBack
                         });
 
                     break;
