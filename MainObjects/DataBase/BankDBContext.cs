@@ -12,7 +12,7 @@ namespace BankObjects.EventMessages
     {
         public BankDBContext(string sqlConnection): base (sqlConnection) { }
 
-        public DbSet<ClientSet> Client { get; set; }
+        public DbSet<ClientSet> Client { get; set; } 
 
         public DbSet<DebitSet> DebitCard { get; set; }
 
