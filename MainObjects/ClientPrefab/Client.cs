@@ -59,8 +59,8 @@ namespace BankObjects.ClientPrefab
             AccountID = clientSet.AccountId;
             Name = clientSet.Name;
             PhoneNumber = clientSet.PhoneNumber;
-            Status = ClientStatus.GetStatusUsingLVL(clientSet.Status);
-            Reputation = ClientReputation.GetReputationUsingLVL(clientSet.Reputation);
+            Status = StatusFactory.GetStatusUsingLVL(clientSet.Status);
+            Reputation = ReputatuonFactory.GetReputationUsingLVL(clientSet.Reputation);
             Competence = new(Status, Reputation);
             AccountCreateDate = clientSet.DateToCreate;
             AddCard += bankEvents.NewCard;

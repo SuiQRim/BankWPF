@@ -1,5 +1,4 @@
 ﻿<Window x:Class="BankSystemHW.MainWindow"
-        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -1937,7 +1936,7 @@
                     <TextBlock VerticalAlignment="Center" TextAlignment="Center">
                             <Run Foreground="{Binding Selected_Client.Status.Color}" 
                                  d:Text="Статус"
-                                 Text="{Binding Selected_Client.Status.Status}"/>
+                                 Text="{Binding Selected_Client.Status.Type}"/>
                     </TextBlock>
                 </Border>
 
@@ -1950,7 +1949,7 @@
 
 
                     <TextBlock VerticalAlignment="Center" TextAlignment="Center">
-                        <Run Text="{Binding Selected_Client.Reputation.Reputatuion, StringFormat=' {0} репутация'}"
+                        <Run Text="{Binding Selected_Client.Reputation.Type, StringFormat=' {0} репутация'}"
                              d:Text="Репутация"
                              Foreground="{Binding Selected_Client.Reputation.Color}"/>
                     </TextBlock>

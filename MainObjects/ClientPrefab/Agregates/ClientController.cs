@@ -116,10 +116,10 @@ namespace BankObjects.ClientPrefab.Agregates
         private static readonly Random rnd = new Random();
 
         public static ClientStatus RandomClientStatus() => 
-            ClientStatus.GetStatusUsingLVL(rnd.Next(0, 3));
+            StatusFactory.GetStatusUsingLVL(rnd.Next(0, 3));
 
         public static ClientReputation RandomClientReputation() =>
-            ClientReputation.GetReputationUsingLVL(rnd.Next(0, 4));
+            ReputatuonFactory.GetReputationUsingLVL(rnd.Next(0, 4));
 
         static public void CardCantBeCreated(int Max, string Type)
         {
