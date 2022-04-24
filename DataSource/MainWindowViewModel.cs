@@ -15,9 +15,8 @@ using BankObjects.CardPrefab.Invest;
 using BankObjects.EventMessages;
 using BankObjects.EventMessages.Transaction;
 using DataSource.Child;
-using System.Diagnostics;
 using System.Data.SqlClient;
-using System.Globalization;
+using System.IO;
 
 namespace DataSource
 {
@@ -1146,6 +1145,7 @@ namespace DataSource
 
             Events = EventData.GetEvents();
             Events.Add(new EventData("Другое",0));
+
 
         }
 
