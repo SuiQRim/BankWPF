@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocalSerialization\LocalSerialization.csproj" />
     <ProjectReference Include="..\MainObjects\BankObjects.csproj" />
     <ProjectReference Include="..\Serialization\LocalSerialization.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using BankObjects.EventMessages.Transaction;
 using BankObjects.CardPrefab;
 using BankObjects.CardPrefab.DebitCard;
 using BankObjects.CardPrefab.CreditCard;
@@ -9,8 +8,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Diagnostics;
 using Z.EntityFramework.Plus;
+using BankObjects.DataBase.Messages;
 
-namespace BankObjects.EventMessages
+namespace BankObjects.DataBase
 {
     public class BankEvents
     {
@@ -140,7 +140,7 @@ namespace BankObjects.EventMessages
         /// <param name="actionType">Тип события</param>
         /// <param name="client">Клиент</param>
         /// <param name="card">Карта которая добавляется</param>
-        public void NewCard( string actionType, Client client, Card card)
+        public void NewCard(string actionType, Client client, Card card)
         {
             AccountMessage accountMessage = new("Оформлена " + actionType, client.AccountID, client.Name, card.CardId);
 
@@ -173,7 +173,7 @@ namespace BankObjects.EventMessages
         public void CardDestroy(string actionType, Client client, Card card)
         {
             AccountMessage accountMessage = new("Закрыта " + actionType, client.AccountID, client.Name, card.CardId);
- 
+
             BankDBContext.DebitCard.Where(c => c.CardId == card.CardId).
                 Delete();
 
@@ -207,7 +207,7 @@ namespace BankObjects.EventMessages
         public void InvestmentFinish(Card investment)
         {
             Investment invest = investment as Investment;
-            AccountMessage accountMessage = new("Инвестиция прошла срок", 
+            AccountMessage accountMessage = new("Инвестиция прошла срок",
                 invest.HolderID, invest.HolderName, invest.CardId);
 
             BankDBContext.Investment.Where(c => c.CardId == invest.CardId).
@@ -221,7 +221,7 @@ namespace BankObjects.EventMessages
                 });
 
             AccountMessages.Add(accountMessage);
-            
+
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace BankObjects.EventMessages
             ObservableCollection<Client> clientList = new();
 
             var clientSets = BankDBContext.Client;
-            foreach (var clientSet in clientSets) 
+            foreach (var clientSet in clientSets)
             {
                 clientList.Add(new Client(clientSet, this));
             }
@@ -242,11 +242,11 @@ namespace BankObjects.EventMessages
             return clientList;
         }
 
-        public static void IncreasBalance(Debit debit, double value) 
+        public static void IncreasBalance(Debit debit, double value)
         {
             debit.Balance += value;
             BankDBContext.DebitCard.Where(c => c.CardId == debit.CardId).
-               Update(c => new() {Balance = debit.Balance});
+               Update(c => new() { Balance = debit.Balance });
         }
 
         public ObservableCollection<Card> GetCardCollectionFromDataBase(Client client, string TypeOfCard)

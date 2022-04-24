@@ -1,8 +1,8 @@
-﻿using BankObjects.EventMessages.Transaction;
-using BankObjects.EventMessages;
-using BankObjects.ClientPrefab.Agregates;
+﻿using BankObjects.ClientPrefab.Agregates;
 using BankObjects.CardPrefab.Exceptions;
 using System.Data.SqlClient;
+using BankObjects.DataBase.Messages;
+using BankObjects.DataBase;
 
 namespace BankObjects.CardPrefab.DebitCard
 {

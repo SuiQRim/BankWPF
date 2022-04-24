@@ -1,12 +1,11 @@
 ﻿using System.Windows.Media;
 using System;
 using System.Collections.ObjectModel;
-using InfoWork;
-using BankObjects.EventMessages.Transaction;
 using BankObjects.ClientPrefab.Agregates;
-using BankObjects.EventMessages;
 using BankObjects.CardPrefab.Exceptions;
 using System.Data.SqlClient;
+using BankObjects.DataBase.Messages;
+using BankObjects.DataBase;
 
 namespace BankObjects.CardPrefab.Invest
 {

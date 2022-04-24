@@ -4,13 +4,12 @@ using NameGenerator.Generators;
 using BankObjects.ClientPrefab.Agregates;
 using BankObjects.ClientPrefab.Agregates.Status;
 using BankObjects.ClientPrefab.Agregates.Reputation;
-using InfoWork;
-using BankObjects.EventMessages;
 using BankObjects.CardPrefab;
 using BankObjects.CardPrefab.DebitCard;
 using BankObjects.CardPrefab.Invest;
 using BankObjects.CardPrefab.CreditCard;
 using System.Data.SqlClient;
+using BankObjects.DataBase;
 
 namespace BankObjects.ClientPrefab
 {

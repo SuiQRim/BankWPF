@@ -1,5 +1,5 @@
 ﻿using System;
-using BankObjects.EventMessages.Transaction;
+using BankObjects.DataBase.Messages;
 
 
 namespace BankObjects.CardPrefab.Exceptions

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InfoWork
+namespace BankObjects
 {
     public static class IDCreater
     {

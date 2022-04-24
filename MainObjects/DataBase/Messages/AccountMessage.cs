@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace BankObjects.EventMessages
+namespace BankObjects.DataBase.Messages
 {
     public class AccountMessage
     {
         public AccountMessage(string Status, string Id, string Name, string cardID)
         {
-            this.ActionType = Status;
+            ActionType = Status;
             this.Id = Id;
             this.Name = Name;
-            this.CardID = cardID;
+            CardID = cardID;
             MessageDate = DateTime.Now;
         }
 

@@ -2,7 +2,7 @@
 using BankObjects.ClientPrefab;
 using BankObjects.CardPrefab;
 
-namespace BankObjects.EventMessages.Transaction
+namespace BankObjects.DataBase.Messages
 {
     public class TransactionMessage
     {
@@ -19,37 +19,37 @@ namespace BankObjects.EventMessages.Transaction
             this.CardRecipient = CardRecipient;
             this.Commission = Cash - Commission;
             this.CashBack = CashBack;
-            this.Status = new TransactionInWaiting();
-            this.TimeToSend = DateTime.Now;
+            Status = new TransactionInWaiting();
+            TimeToSend = DateTime.Now;
         }
 
         public TransactionMessage(string ActionType, TransactionMessage TransactionMsg)
         {
             Id = IdCount++;
             this.ActionType = ActionType;
-            this.Cash = TransactionMsg.Cash - TransactionMsg.Commission;
-            this.Sender = TransactionMsg.Sender;
-            this.CardSender = TransactionMsg.CardSender;
-            this.Recipient = TransactionMsg.Recipient;
-            this.CardRecipient = TransactionMsg.CardRecipient;
-            this.Commission = TransactionMsg.Commission;
-            this.Status = TransactionMsg.Status;
-            this.TimeToSend = DateTime.Now;  
+            Cash = TransactionMsg.Cash - TransactionMsg.Commission;
+            Sender = TransactionMsg.Sender;
+            CardSender = TransactionMsg.CardSender;
+            Recipient = TransactionMsg.Recipient;
+            CardRecipient = TransactionMsg.CardRecipient;
+            Commission = TransactionMsg.Commission;
+            Status = TransactionMsg.Status;
+            TimeToSend = DateTime.Now;
         }
         public TransactionMessage(TransactionMessage TransactionMsg)
         {
             Id = IdCount++;
-            this.ActionType = "Возвращено";
-            this.Cash = TransactionMsg.Cash + TransactionMsg.Commission;
-            this.Sender = null;
-            this.CardSender = null;
-            this.Recipient =  TransactionMsg.Sender;
-            this.CardRecipient = TransactionMsg.CardSender;
-            this.Commission = TransactionMsg.Commission;
-            this.Status = TransactionMsg.Status;
-            this.TimeToSend = DateTime.Now;
+            ActionType = "Возвращено";
+            Cash = TransactionMsg.Cash + TransactionMsg.Commission;
+            Sender = null;
+            CardSender = null;
+            Recipient = TransactionMsg.Sender;
+            CardRecipient = TransactionMsg.CardSender;
+            Commission = TransactionMsg.Commission;
+            Status = TransactionMsg.Status;
+            TimeToSend = DateTime.Now;
         }
-       
+
 
         private static int IdCount = 0;
 
@@ -67,13 +67,13 @@ namespace BankObjects.EventMessages.Transaction
 
         public Client? Recipient { get; private set; }
 
-        public Card? CardRecipient { get; private set; } 
+        public Card? CardRecipient { get; private set; }
 
         public double Cash { get; set; }
 
         public double CashBack { get; set; }
 
-        public double Commission { get;  set; }
+        public double Commission { get; set; }
 
 
         public override string ToString()

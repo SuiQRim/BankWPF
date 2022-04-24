@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace BankObjects.EventMessages.Transaction
+namespace BankObjects.DataBase.Messages
 {
     public abstract class TransactionStatus
     {

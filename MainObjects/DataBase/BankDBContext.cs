@@ -6,13 +6,13 @@ using BankObjects.CardPrefab.DebitCard;
 using BankObjects.CardPrefab.CreditCard;
 using BankObjects.CardPrefab.Invest;
 
-namespace BankObjects.EventMessages
+namespace BankObjects.DataBase
 {
     internal class BankDBContext : DbContext
     {
-        public BankDBContext(string sqlConnection): base (sqlConnection) { }
+        public BankDBContext(string sqlConnection) : base(sqlConnection) { }
 
-        public DbSet<ClientSet> Client { get; set; } 
+        public DbSet<ClientSet> Client { get; set; }
 
         public DbSet<DebitSet> DebitCard { get; set; }
 

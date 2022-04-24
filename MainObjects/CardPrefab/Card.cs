@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows;
 using System.Collections.ObjectModel;
-using BankObjects.EventMessages.Transaction;
-using BankObjects.EventMessages;
 using BankObjects.ClientPrefab.Agregates;
 using BankObjects.CardPrefab.Exceptions;
 using ViewModel;
-using InfoWork;
 using System.Data.SqlClient;
+using BankObjects.DataBase.Messages;
+using BankObjects.DataBase;
 
 
 namespace BankObjects.CardPrefab

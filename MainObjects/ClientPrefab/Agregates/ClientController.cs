@@ -6,10 +6,6 @@ using BankObjects.CardPrefab;
 using BankObjects.CardPrefab.Invest;
 using BankObjects.ClientPrefab.Agregates.Reputation;
 using BankObjects.ClientPrefab.Agregates.Status;
-using BankObjects.EventMessages;
-using BankObjects.CardPrefab.CreditCard;
-using BankObjects.CardPrefab.DebitCard;
-using System.Data.SqlClient;
 
 namespace BankObjects.ClientPrefab.Agregates
 {
