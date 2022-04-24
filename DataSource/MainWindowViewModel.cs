@@ -15,8 +15,10 @@ using BankObjects.CardPrefab.Invest;
 using BankObjects.EventMessages;
 using BankObjects.EventMessages.Transaction;
 using DataSource.Child;
-using System.Data.SqlClient;
+using System.Data.SqlClient; 
 using System.IO;
+using LocalSerialization;
+using LocalSerialization.Mods;
 
 namespace DataSource
 {
@@ -817,6 +819,19 @@ namespace DataSource
         {
             BankEvents.IncreasBalance(DeterminesWhoCardIs() as Debit, 100000);
         }
+
+
+        private SaveController _saveController = new();
+        public ICommand SaveClient { get; }
+        private void OnSaveClient(object p)
+        {
+            _saveController.Mode = new KeeperJson();
+            _saveController.Mode.SaveSelectedClient(Selected_Client);
+
+            _saveController.Mode = new KeeperXML();
+            _saveController.Mode.SaveSelectedClient(Selected_Client);
+        }
+
         #endregion
 
         #region Transaction
@@ -1142,6 +1157,7 @@ namespace DataSource
             Info_VisibilityControl = new LamdaCommand(OnInfo_VisibilityControl, CanAnyWay);
             History_VisibilityControl = new LamdaCommand(OnHistory_VisibilityControl, CanAnyWay);
             IncreasBalance = new LamdaCommand(OnIncreasBalance, CanIfDebitSelected);
+            SaveClient = new LamdaCommand(OnSaveClient, CanIfClientSelected);
 
             Events = EventData.GetEvents();
             Events.Add(new EventData("Другое",0));

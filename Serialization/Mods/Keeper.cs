@@ -1,49 +1,48 @@
-﻿using System;
-using BankObjects.ClientPrefab;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BankObjects.ClientPrefab;
 using System.IO;
 
 namespace LocalSerialization.Mods
 {
-    internal abstract class Keeper : ISaveMode
+    public abstract class Keeper : ISaveMode
     {
-        protected static int Id;
-        private const string Road = @"LocalSave\";
-        private const string AllDataSavePath = @"Save_BankData\";
-        private const string ClientSavePath = @"Save_BankData\";
+        public Keeper(string format) { this._fileFormat = format;}
+       
+        private const string _localDirectory = @"LocalSave";
+        private const string _clientSaveDirectory = @"ClientData";
+        public string _fileFormat;
+
+        public string Format { get => _fileFormat; }
 
         /// <summary>
-        /// Работа с текстом чтобы все сохранялось в верном формате
+        /// Возвращает текст в верном формате
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
         private static string CorrectText(string text) => text.Replace(" ", string.Empty);
 
-        private static string CompositeClientSaveFileName(string clientName)
+        /// <summary>
+        /// Собирает путь к файлу
+        /// </summary>
+        /// <param name="clientName"></param>
+        /// <returns></returns>
+        private string CombinePathForClientFile(string clientName)
         {
             clientName = CorrectText(clientName);
-            string combinePath = Path.Combine(Road,ClientSavePath, clientName);
+            string combinePath = Path.Combine(_localDirectory, _clientSaveDirectory, Format, clientName + $".{Format}");
             return combinePath;
-        } 
-
-        public void SaveAllData()
-        {
         }
 
-        public async void SaveSelectedClient(Client client)
+        public void SaveSelectedClient(Client client)
         {
-            string[] file = CreateFormat(client, CompositeClientSaveFileName(client.Name));
+            string[] file = CreateFormat(new ClientSet(client), CombinePathForClientFile(client.Name));
 
-            using (StreamWriter sw = new StreamWriter(file[0]))
+            using (StreamWriter sw = new(file[0]))
             {
                 sw.WriteAsync(file[1]);
             };
         }
-        
-        protected abstract string [] CreateFormat(Client client, string combinePath);
+
+        protected abstract string [] CreateFormat(ClientSet client, string combinePath);
 
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MainObjects\BankObjects.csproj" />
+    <ProjectReference Include="..\Serialization\LocalSerialization.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 

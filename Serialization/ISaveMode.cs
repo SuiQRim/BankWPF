@@ -1,16 +1,18 @@
-﻿using System;
-using BankObjects.ClientPrefab;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BankObjects.ClientPrefab;
 
 namespace LocalSerialization
 {
-    internal interface ISaveMode
+    public interface ISaveMode
     {
+        /// <summary>
+        /// Сохранет выбранного клиента
+        /// </summary>
+        /// <param name="client"></param>
         public void SaveSelectedClient(Client client);
 
-        public void SaveAllData();
+        /// <summary>
+        /// Расширение файла
+        /// </summary>
+        public string Format { get; }
     }
 }

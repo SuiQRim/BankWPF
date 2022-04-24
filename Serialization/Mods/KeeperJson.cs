@@ -1,18 +1,15 @@
 ﻿using BankObjects.ClientPrefab;
-using System.IO;
 using System.Text.Json;
 
 namespace LocalSerialization.Mods
 {
-    internal class KeeperJson : Keeper
+    public class KeeperJson : Keeper
     {
-        protected override string[] CreateFormat(Client client, string combinePath)
+        public KeeperJson() : base("json") { }
+        protected override string[] CreateFormat(ClientSet client, string path)
         {
             string json = JsonSerializer.Serialize(client);
-            string fullPath = combinePath + ".json";
-
-            string[] file = new string[2] { fullPath, json };
-
+            string[] file = new string[2] {path, json };
             return file;
         }
     }

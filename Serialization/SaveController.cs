@@ -7,7 +7,7 @@ using BankObjects.ClientPrefab;
 
 namespace LocalSerialization
 {
-    internal class Save
+    public class SaveController
     {
         public ISaveMode Mode { get; set; }
 
