@@ -14,7 +14,6 @@ using BankObjects.CardPrefab.CreditCard;
 using BankObjects.CardPrefab.Invest;
 using DataSource.Child;
 using System.Data.SqlClient;
-using System.IO;
 using LocalSerialization;
 using LocalSerialization.Mods;
 using BankObjects.DataBase.Messages;
@@ -817,7 +816,7 @@ namespace DataSource
         public ICommand IncreasBalance { get; }
         private void OnIncreasBalance(object p)
         {
-            BankEvents.IncreasBalance(DeterminesWhoCardIs() as Debit, 100000);
+            BankEvents.IncreasBalance((DeterminesWhoCardIs() as Debit)!, 100000);
         }
 
 
@@ -826,10 +825,10 @@ namespace DataSource
         private void OnSaveClient(object p)
         {
             _saveController.Mode = new KeeperJson();
-            _saveController.Mode.SaveSelectedClient(Selected_Client);
+            _saveController.Mode.SaveSelectedClient(Selected_Client!);
 
             _saveController.Mode = new KeeperXML();
-            _saveController.Mode.SaveSelectedClient(Selected_Client);
+            _saveController.Mode.SaveSelectedClient(Selected_Client!);
         }
 
         #endregion
@@ -918,7 +917,7 @@ namespace DataSource
         {
             NewInvest_Menu_Visibillity = false;
             NewCredit_Menu_Visibility = false;
-            Debit newdeDit = new(Selected_Client.Name, Selected_Client.AccountID, BankEvents);
+            Debit newdeDit = new(Selected_Client!.Name, Selected_Client.AccountID, BankEvents);
             
             Selected_Client!.AddDebitCard( newdeDit);
 
@@ -953,7 +952,7 @@ namespace DataSource
         {
             Credit newCredit = new(NewCredit.Value, NewCredit.MonthDebt,
                 NewCredit.MonthCount, NewCredit.Precent,
-                Selected_Client.Name, Selected_Client.AccountID, BankEvents);
+                Selected_Client!.Name, Selected_Client.AccountID, BankEvents);
 
             
             Selected_Client!.AddCreditCard( newCredit);
@@ -1024,7 +1023,7 @@ namespace DataSource
         {
             Investment invest = new(NewInvest.Value, NewInvest.Precent,
                 NewInvest.ClearProfit, NewInvest.MounthCount, NewInvest.IsAccumulation,
-                Selected_Client.Name, Selected_Client.AccountID, BankEvents);
+                Selected_Client!.Name, Selected_Client.AccountID, BankEvents);
 
            
 
@@ -1054,7 +1053,7 @@ namespace DataSource
             Invest_IsWithDrawCash_Visibility = false;
 
             TransactionMessage transactionMessage = new("Отправлено",0,Selected_Client!, Selected_Investment!, 
-                Selected_Client!, TransactionCard, 0 ,0);
+                Selected_Client!, TransactionCard!, 0 ,0);
 
             Selected_Investment!.TransactionSend(transactionMessage);
 
@@ -1072,7 +1071,7 @@ namespace DataSource
 
             //Создается экземпляр информации о транзакции
             TransactionMessage transactionMessage = new("Отправлено", Selected_Investment!.StartBalance,
-                    Selected_Client!, TransactionCard, Selected_Client!,
+                    Selected_Client!, TransactionCard!, Selected_Client!,
                     Selected_Investment!, 0 ,Selected_Investment!.StartBalance);
 
             //Вызывается метод транзакции у отправителя

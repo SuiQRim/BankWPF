@@ -1976,7 +1976,7 @@
                 <Button Content="Тайм Скип (1 мес)"
                         FontSize="14"
                         Margin="10,10,0,68"
-                        Command="{Binding TimeSkip}" HorizontalAlignment="Left" Width="119"/>
+                        Command="{Binding TimeSkip}" HorizontalAlignment="Left" Width="142"/>
 
 
                 <Border Background="PaleGreen"
@@ -2005,7 +2005,7 @@
                     FontSize="14"
                     Command="{Binding IncreasBalance}"
                     BorderThickness="1"/>
-                
+
                 <Button Content="Save Client"
                     Margin="157,39,10,39"
                     FontSize="14"

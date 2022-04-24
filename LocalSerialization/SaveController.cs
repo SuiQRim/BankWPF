@@ -9,7 +9,7 @@ namespace LocalSerialization
 {
     public class SaveController
     {
-        public ISaveMode Mode { get; set; }
+        public ISaveMode? Mode { get; set; }
 
         public void Serilize(Client client) 
         {
