@@ -1966,10 +1966,10 @@
             <Grid>
 
                 <Button Content="Add Client"
-                    Margin="10,39,134,39"
+                    Margin="10,39,0,39"
                     FontSize="14"
                     Command="{Binding AddClient}"
-                    BorderThickness="1"/>
+                    BorderThickness="1" HorizontalAlignment="Left" Width="142"/>
 
 
 
@@ -1981,7 +1981,7 @@
 
                 <Border Background="PaleGreen"
                         CornerRadius="5"
-                        Margin="10,68,103,10">
+                        Margin="10,68,0,10" HorizontalAlignment="Left" Width="173">
 
                     <StackPanel Orientation="Horizontal" >
 
