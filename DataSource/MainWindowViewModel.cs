@@ -826,9 +826,11 @@ namespace DataSource
         {
             _saveController.Mode = new KeeperJson();
             _saveController.Mode.SaveSelectedClient(Selected_Client!);
+            _saveController.Mode.SaveAllClients(ClienList.ToList());
 
             _saveController.Mode = new KeeperXML();
             _saveController.Mode.SaveSelectedClient(Selected_Client!);
+            _saveController.Mode.SaveAllClients(ClienList.ToList());
         }
 
         #endregion

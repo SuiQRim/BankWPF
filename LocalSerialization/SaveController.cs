@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using BankObjects.ClientPrefab;
 
 namespace LocalSerialization
@@ -11,9 +12,10 @@ namespace LocalSerialization
     {
         public ISaveMode? Mode { get; set; }
 
-        public void Serilize(Client client) 
+        public void Serilize(Client client, List<Client> clientCollection) 
         {
             Mode.SaveSelectedClient(client);
+            Mode.SaveAllClients(clientCollection);
         }
 
     }

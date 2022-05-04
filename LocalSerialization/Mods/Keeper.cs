@@ -1,5 +1,6 @@
 ﻿using BankObjects.ClientPrefab;
 using System.IO;
+using System.Collections.Generic;
 
 namespace LocalSerialization.Mods
 {
@@ -7,12 +8,6 @@ namespace LocalSerialization.Mods
     {
         public Keeper(string format) { this._fileFormat = format;}
        
-
-        // Предоставленные папки
-        private const string _localDirectory = @"LocalSave";
-        private const string _clientSaveDirectory = @"ClientData";
-
-
         public string _fileFormat;
         public string Format { get => _fileFormat; }
 
@@ -31,7 +26,15 @@ namespace LocalSerialization.Mods
         private string CombinePathForClientFile(string clientName)
         {
             clientName = CorrectText(clientName);
-            string combinePath = Path.Combine(_localDirectory, _clientSaveDirectory, Format, clientName + $".{Format}");
+            string combinePath = Path.Combine(DataDirectory.Diretory, DataDirectory.ClientSaves,
+                DataDirectory.OriginalClientPath, Format, clientName + $".{Format}");
+            return combinePath;
+        }
+        private string CombinePathForClientCollectionFile()
+        {
+            string clientName = "CollectionOfClient";
+            string combinePath = Path.Combine(DataDirectory.Diretory, DataDirectory.ClientSaves,
+                DataDirectory.CollectionClientPath, Format, clientName + $".{Format}");
             return combinePath;
         }
 
@@ -55,6 +58,23 @@ namespace LocalSerialization.Mods
 
         }
 
+        public void SaveAllClients(List<Client> clientCollection) 
+        {
+            string[] file = CreateFormat(
+                ConvertClientCollectionToDataBaseFormat(clientCollection), 
+                CombinePathForClientCollectionFile()
+                );
+            try
+            {
+                WriteFile(file);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                DataDirectory.CreateDirectory();
+                WriteFile(file);
+            }
+        }
+
         /// <summary>
         /// Записывает текст с файл
         /// </summary>
@@ -74,6 +94,17 @@ namespace LocalSerialization.Mods
         /// <param name="combinePath">Путь без расширения</param>
         /// <returns></returns>
         protected abstract string [] CreateFormat(ClientSet client, string combinePath);
+        protected abstract string[] CreateFormat(List<ClientSet> client, string combinePath);
 
+        private static List<ClientSet> ConvertClientCollectionToDataBaseFormat(List<Client> clientList)
+        {
+            List<ClientSet> clientSet = new ();
+
+            foreach (var client in clientList)
+            {
+                clientSet.Add(new ClientSet(client));
+            }
+            return clientSet;
+        }
     }
 }

@@ -14,18 +14,33 @@ namespace LocalSerialization
         {
             Build();
         }
+
         /// <summary>
         /// Создает директорию со всеми отсутствующими папками
         /// P.s. я понимаю что это жудко ужасный метод
         /// </summary>
         private static void Build() 
         {
-            string path = "LocalSave";;
-            Directory.CreateDirectory("LocalSave");
-            path = Path.Combine(path, "ClientData");
-            Directory.CreateDirectory("LocalSave");
-            Directory.CreateDirectory(path + @"\json");
-            Directory.CreateDirectory(path + @"\xml");
+            string path = Diretory;
+            Directory.CreateDirectory(path);
+
+            path = Path.Combine(Diretory, ClientSaves);
+            Directory.CreateDirectory(path);
+
+            string original = Path.Combine(Diretory, ClientSaves, OriginalClientPath);
+            string collection = Path.Combine(Diretory, ClientSaves, CollectionClientPath);
+
+
+            Directory.CreateDirectory(original + @"\json");
+            Directory.CreateDirectory(original + @"\xml");
+            Directory.CreateDirectory(collection + @"\json");
+            Directory.CreateDirectory(collection + @"\xml");
         }
+
+        public const string Diretory = "LocalSave";
+        public const string ClientSaves = "ClientData";
+        public const string OriginalClientPath = "Original";
+        public const string CollectionClientPath = "Collection";
+
     }
 }
